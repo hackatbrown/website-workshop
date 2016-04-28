@@ -54,7 +54,7 @@ function compileJS(watch) {
 
         var bundler = browserify({
             entries: [page],
-            debug: true,
+            debug: watch,
             cache: {},                          // Watchify uses cache stuff in order to quickly
             packageCache: {},                   // regenerate the compiled files
             plugin: watch ? [watchify] : [],
