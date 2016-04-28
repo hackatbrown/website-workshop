@@ -1,0 +1,70 @@
+{# The base template for ordinary pages. Put shared markup and styles here. #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+
+    <link rel="author" href="/humans.txt" />
+
+    <title>
+        {% block title %} Hack@Brown 2016 &mdash; February 6&ndash;7, Brown University {% endblock %}
+    </title>
+
+    {% block head_css %}
+    <!-- Stylesheets -->
+    <link rel='stylesheet' href='/static/dist/css/main.css' /> 
+    {% endblock %}
+
+    <!-- Social Data -->
+    <meta property="og:title" content="Hack@Brown 2016" />
+    <meta property="og:url" content="https://2016.hackatbrown.org" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Hack@Brown 2016" />
+    <meta property="og:description" content="Make, Play, Learn. Join us and 400 of your friends
+        from February 6-7 for Brown's annual 24 hour hackathon." />
+    <meta property="og:image" content="https://2016.hackatbrown.org/static/img/og_image.png" />
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hack@Brown 2016">
+    <meta name="twitter:description" content="Make, Play, Learn. Join us and 400 of your friends
+        from February 6-7 for Brown's annual 24 hour hackathon.">
+    <meta name="twitter:creator" content="@hackatbrown">
+    <meta name="twitter:image" content="https://2016.hackatbrown.org/static/img/og_image.png?1">
+    <meta name="twitter:domain" content="hackatbrown.org">
+    <meta name="twitter:site" content="@hackatbrown">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/favicon/favicon.ico" type="image/x-icon" />
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/static/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/static/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/static/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/static/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/static/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/static/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/static/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/static/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-icon-180x180.png">
+
+    <link rel="icon" type="image/png" sizes="192x192"  href="/static/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/static/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png">
+
+    <link rel="mask-icon" href="/static/img/claw-logomark.svg" color='#292249'>
+    {% endblock %}
+</head>
+
+<body>
+    {% block nav %}
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+</body>
+{% block domJS %}
+{% endblock %}
+</html>
