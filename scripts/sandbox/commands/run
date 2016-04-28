@@ -1,10 +1,15 @@
-if [ ! -d "$HAB_DIR/venv" ]; then
+# If there is no venv directory
+elif [ ! -d "$HAB_DIR/venv" ]; then
+	# Use virtualenv to create it.
     virtualenv $HAB_DIR/venv
+    # activate the virtualenv
 	source $HAB_DIR/venv/bin/activate
+	# install flask to it.
     pip install flask
 fi
 
 
 source $HAB_DIR/venv/bin/activate
 cd "${APP}"
+# run the server
 python main.py
