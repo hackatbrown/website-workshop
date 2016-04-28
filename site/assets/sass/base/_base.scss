@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+
+    color: $red;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+/// Gives a section the dark purple background and white text
+.dark-section {
+    background: $blurple;
+    color: white;
+
+    margin-top: -3px;
+}

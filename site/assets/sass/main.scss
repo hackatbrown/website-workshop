@@ -1,0 +1,33 @@
+@charset 'UTF-8';
+
+// 1. Vendors - (we haven't included these in this sample project but we did use them!)
+// @import
+//     'vendor/bootstrap',
+//     'vendor/font-awesome';
+
+// 2. Utilities
+@import
+    'utils/variables',
+    'utils/functions',
+    'utils/mixins';
+
+// 3. Base
+@import
+    'base/fonts',
+    'base/base',
+    'base/typography',
+    'base/helpers';
+
+// 4. Layout
+@import
+    'layout/grid',
+    'layout/nav',
+    'layout/footer';
+
+// 5. Components
+@import
+    'components/tables';
+
+// 6. Shame
+@import
+    'shame';

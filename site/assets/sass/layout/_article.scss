@@ -1,0 +1,47 @@
+.container {
+    max-width: 960px;
+}
+
+.article-container {
+    margin-top: 12rem;
+}
+
+article, aside {
+    font-size: 1.8rem;
+    font-weight: $light;
+}
+
+header {
+    h1 {
+        margin-bottom: 0.4rem;
+        color: $cyan;
+        font-size: 4rem;
+    }
+
+    p {
+        margin-top: 0;
+
+        font-size: 2rem;
+        font-weight: $light;
+        color: $grey;
+    }
+}
+
+article {
+    h2 {
+        color: $purple;
+        font-size: 3rem;
+    }
+
+    h4 {
+        margin-bottom: 0.2rem;
+    }
+
+    h4 + p {
+        margin-top: 0;
+    }
+}
+
+aside h2 {
+    margin-top: 0;
+}

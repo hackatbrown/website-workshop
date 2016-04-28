@@ -1,0 +1,71 @@
+$break-small: 600px;
+$break-medium: 750px;
+$break-large: 1024px;
+
+@mixin respond-to($media) {
+    @if $media == small {
+        @media only screen and (max-width: $break-small) { @content; }
+    }
+    @else if $media == medium {
+        @media only screen and (max-width: $break-medium) { @content; }
+    }
+    @else if $media == large {
+        @media only screen and (max-width: $break-large) { @content; }
+    }
+}
+
+
+/// Helper mixin to provide simple API to selector nesting
+/// @param {String} $selector - Selector
+@mixin when-inside($selector) {
+    #{$selector} & {
+        @content;
+    }
+}
+
+/// Helper to have an element auto-clear its children
+@mixin clearfix() {
+    &:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+}
+
+/// Helper applied to elements facing a weird flicker effect during an
+/// unrelated animation. Safari only!
+@mixin flicker-fix {
+    transform: translate3d(0,0,0);
+}
+
+/// Helper to size an element
+/// @author Hugo Giraudel
+/// @param {Length} $width
+/// @param optional {Length} $height (if empty, defaults to width)
+
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+
+/// Slightly lighten a color
+/// @access public
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function tint($color, $percentage) {
+    @return mix(white, $color, $percentage);
+}
+
+/// Slightly darken a color
+/// @access public
+/// @param {Color} $color - color to shade
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function shade($color, $percentage) {
+    @return mix(black, $color, $percentage);
+}
