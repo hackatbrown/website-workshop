@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# colors
+if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    export TERM_TEXT_RED=$(tput setaf 1)
+    export TERM_TEXT_GREEN=$(tput setaf 2)
+    export TERM_TEXT_CYAN=$(tput setaf 6)
+    export TERM_TEXT_RESET=$(tput sgr0)
+else
+    export TERM_TEXT_RED=""
+    export TERM_TEXT_GREEN=""
+    export TERM_TEXT_CYAN=""
+    export TERM_TEXT_RESET=""
+fi
+
+if [ -z "$HAB_DIR" ]; then
+    HAB_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )"
+fi
+
+SANDBOX_DIR="${HAB_DIR}/scripts/sandbox"
+COMMANDS_DIR="${SANDBOX_DIR}/commands"
+APP="${HAB_DIR}/site"
+
+# Setting alias for sandbox to hab for shorthand
+alias hab=sandbox
+# Sandbox cli.
+function sandbox() {
+    if [ $1 ] ; then
+		__find_command $@
+    else
+        cd $HAB_DIR
+        echo "${TERM_TEXT_GREEN}Moved to H@B Working Directory.${TERM_TEXT_RESET}"
+    fi
+}
+
+function __find_command() {
+    local command="$1"
+    shift
+    if [ -f "$COMMANDS_DIR/$command" ]; then
+        export HAB_DIR
+        export APP
+        bash ${COMMANDS_DIR}/$command $@
+    else
+        echo "${TERM_TEXT_RED}Command not found.${TERM_TEXT_RESET}"
+    fi
+}
+

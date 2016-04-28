@@ -31,7 +31,6 @@ gulp.task('css', function() {
     .pipe(sass().on('error', gutil.log))
     .pipe(autoprefixer({
       browsers: ['last 3 versions'],
-      cascade: false
     }))
     .pipe(gulp.dest(config.css.outputDir));
 
@@ -39,8 +38,7 @@ gulp.task('css', function() {
   gulp.src(config.css.pages)
     .pipe(sass().on('error', gutil.log))
     .pipe(autoprefixer({
-      browsers: ['last 2 versions'],
-      cascade: false
+      browsers: ['last 3 versions'],
     }))
     .pipe(gulp.dest(config.css.outputDir + '/pages'));
 });
@@ -94,5 +92,4 @@ gulp.task('build', function () {
     gulp.start('css');
 });
 
-
-
+gulp.task('default', ['watch']);

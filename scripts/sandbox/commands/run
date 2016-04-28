@@ -1,0 +1,10 @@
+if [ ! -d "$HAB_DIR/venv" ]; then
+    virtualenv $HAB_DIR/venv
+	source $HAB_DIR/venv/bin/activate
+    pip install flask
+fi
+
+
+source $HAB_DIR/venv/bin/activate
+cd "${APP}"
+python main.py
