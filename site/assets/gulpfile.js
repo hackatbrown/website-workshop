@@ -1,22 +1,49 @@
 "use strict";
 
-var babelify   = require('babelify'),
-    browserify = require('browserify'),
-    buffer     = require('vinyl-buffer'),
-    gulp       = require('gulp'),
-    glob       = require('glob'),
-    gutil      = require('gulp-util'),
-    rename     = require('gulp-rename'),
-    source     = require('vinyl-source-stream'),
-    colors     = require('colors'),
-    watchify   = require('watchify');
+var babelify     = require('babelify'),
+    browserify   = require('browserify'),
+    buffer       = require('vinyl-buffer'),
+    gulp         = require('gulp'),
+    sass         = require('gulp-sass'),
+    glob         = require('glob'),
+    gutil        = require('gulp-util'),
+    rename       = require('gulp-rename'),
+    source       = require('vinyl-source-stream'),
+    colors       = require('colors'),
+    watchify     = require('watchify'),
+    autoprefixer = require('gulp-autoprefixer');
 
 var config = {
     js: {
         src: 'js/src/pages/*.*',       // Entry point
         outputDir: '../static/js',      // Directory to save bundle to
     },
+    css: {
+        main: './sass/main.scss',
+        pages: './sass/pages/*.scss',
+        outputDir: '../static/css'
+    }
 };
+
+gulp.task('css', function() {
+  // main.scss
+  gulp.src(config.css.main)
+    .pipe(sass().on('error', gutil.log))
+    .pipe(autoprefixer({
+      browsers: ['last 3 versions'],
+      cascade: false
+    }))
+    .pipe(gulp.dest(config.css.outputDir));
+
+  // pages
+  gulp.src(config.css.pages)
+    .pipe(sass().on('error', gutil.log))
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions'],
+      cascade: false
+    }))
+    .pipe(gulp.dest(config.css.outputDir + '/pages'));
+});
 
 
 function compileJS(watch) {
@@ -59,10 +86,12 @@ function compileJS(watch) {
 
 gulp.task('watch', function () {
     compileJS(true);
+    gulp.watch('./sass/**', ['css']);
 });
 
 gulp.task('build', function () {
     compileJS(false);
+    gulp.start('css');
 });
 
 

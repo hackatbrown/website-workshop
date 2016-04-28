@@ -7,20 +7,10 @@ footer {
   font-weight: $light;
   color: $lightgrey;;
 
-  @media(max-width: $screen-sm-max) {
-    margin-top: 80px;
-    text-align: center;
-  }
-
   ul {
     float: right;
     padding-left: 0;
     list-style: none;
-
-    @media (max-width: $screen-xs-max) {
-      float: none;
-      margin: auto;
-    }
 
     li {
       display: inline-block;
@@ -47,38 +37,5 @@ footer {
     li:first-child i {
       padding-left: 0;
     }
-  }
-}
-
-footer.day_of {
-  // position: fixed;
-  bottom: 0;
-  text-align: justify;
-  width: 100%;
-  margin-top: 40px;
-  padding: 12px 0;
-  background: rgba(255,255,255,0.7);
-  background: rgba(0,0,0,0.05);
-  // border-top: 1px solid rgba(0,0,0,0.1);
-
-  ul {
-    float: none;
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    margin: 0 auto;
-    width: 100%;
-  }
-
-  li {
-    text-align: center;
-    flex: 1;
-    color: black;
-  }
-
-  a {
-    font-size: 1em;
-    color: $purple;
-
   }
 }
