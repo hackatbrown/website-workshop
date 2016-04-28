@@ -1,164 +1,46 @@
-var gulp = require('gulp');
-var fs   = require('fs');
-var path = require('path');
-var browserify = require('browserify');
-var sass = require('gulp-sass');
-var globbing = require('gulp-css-globbing');
-var autoprefixer = require('gulp-autoprefixer');
-var minifyCss = require('gulp-minify-css');
-var sourcemaps = require('gulp-sourcemaps');
-var watchify = require('watchify');
-var source = require('vinyl-source-stream');
-var stream = require('gulp-streamify');
-var buffer = require('vinyl-buffer');
-var colors = require('colors');
-var gutil = require('gulp-util');
-var uglify = require('gulp-uglify');
-var karma = require('karma').server;
-var jshint = require('gulp-jshint');
+// gulpfile.js
+// Grabbed from this browserify tutorial: https://scotch.io/tutorials/getting-started-with-browserify
+// and slightly modified to reflect Hack@Brown's stack
+"use strict";
 
-var prod = gutil.env.prod;
+var babelify   = require('babelify'),
+        browserify = require('browserify'),
+        buffer     = require('vinyl-buffer'),
+        gulp       = require('gulp'),
+        gutil      = require('gulp-util'),
+        livereload = require('gulp-livereload'),
+        rename     = require('gulp-rename'),
+        source     = require('vinyl-source-stream'),
+        sourceMaps = require('gulp-sourcemaps'),
+        watchify   = require('watchify');
 
-var createBundle = function(options) {
-  var buildOptions = {
-    entries: options.input,
-    extensions: options.extensions,
-    debug: !prod
-  };
-
-  var bundler;
-  if (!prod) {
-    buildOptions.cache = {};
-    buildOptions.packageCache = {};
-    bundler = watchify(browserify(buildOptions));
-  } else {
-    bundler = browserify(buildOptions)
-  }
-
-  var rebundle = function() {
-    var startTime = new Date().getTime();
-    var work =  bundler.bundle()
-    .on('error', function() {
-      return console.log(arguments);
-    })
-    .pipe(source(options.output))
-    .pipe(prod ? stream(uglify()) : gutil.noop())
-    .pipe(gulp.dest(options.destination))
-    .on('end', function() {
-      var time = (new Date().getTime() - startTime) / 1000;
-      return console.log(options.output.cyan + " was browserified: " + (time + 's').magenta);
-    });
-  };
-
-  if (!prod) {
-    bundler.on('update', rebundle);
-  }
-  return rebundle();
+var config = {
+    js: {
+        src: 'js/src/pages/index.js',       // Entry point
+        outputDir: '../static/js',  // Directory to save bundle to
+        mapDir: '../maps',      // Subdirectory to save maps to
+        outputFile: 'bundle.js' // Name to use for bundle
+    },
 };
 
-var createBundles = function(bundles) {
-  return bundles.forEach(function(bundle) {
-    var parts = bundle.split('/');
-    var file = parts.pop();
-    var destDir = parts.length > 0 ? parts.join('/') + '/' : ''
+// This method makes it easy to use common bundling options in different tasks
+function bundle (bundler) {
 
-    return createBundle({
-      input: 'js/src/views/' + bundle + '/' + file,
-      output: file + '.js',
-      extensions: ['.js', '.jsx'],
-      destination: '../static/dist/js/views/' + destDir
-    });
-  });
-};
+    // Add options to add to "base" bundler passed as parameter
+    bundler
+      .bundle()                                    // Start bundle
+      .pipe(source(config.js.src))                 // Entry point
+      .pipe(buffer())                              // Convert to gulp pipeline
+      .pipe(rename(config.js.outputFile))          // Rename output from 'main.js'
+      .pipe(sourceMaps.init({ loadMaps : true }))  // Strip inline source maps
+      .pipe(sourceMaps.write(config.js.mapDir))    // Save source maps to their own directory
+      .pipe(gulp.dest(config.js.outputDir))        // Save 'bundle' to outputDir/
+      .pipe(livereload());                         // Reload browser if relevant
+}
 
-gulp.task('js', function() {
-  var js = 'js/src/views';
-  var controllers = fs.readdirSync(js);
-  var views = [];
+gulp.task('bundle', function () {
+    var bundler = browserify(config.js.src)  // Pass browserify the entry point
+                    .transform(babelify, { presets : [ 'react' ] });  // Then, babelify, with React preset
 
-  for (var i=0; i < controllers.length; i++) {
-    var c = controllers[i];
-
-    if (fs.statSync(path.join(js, c)).isDirectory()) {
-      var potentials = fs.readdirSync(path.join(js, c));
-
-      for (var j=0; j < potentials.length; j++) {
-        var p = potentials[j];
-        
-        if (fs.statSync(path.join(js, c, p)).isDirectory()) {
-          views.push(c + '/' + p)
-        }
-      }
-    }
-  };
-
-  views = views.filter(function(file) {
-    return fs.statSync(path.join(js, file)).isDirectory();
-  });
-  return createBundles(views);
-});
-
-gulp.task('jshint', function() {
-  gulp.src(['js/src/views/**/*.js', 'js/spec/*.js', 'js/src/*.js'])
-  .pipe(jshint())
-  .pipe(jshint.reporter('jshint-stylish'))
-  .pipe(jshint.reporter('fail'));
+    bundle(bundler);  // Chain other options -- sourcemaps, rename, etc.
 })
-
-gulp.task('css', function() {
-  // main.scss
-  gulp.src('./sass/main.scss')
-    .pipe(sourcemaps.init())
-    .pipe(globbing({
-      extensions: ['.scss']
-    }))
-    .pipe(sass().on('error', function(e) {
-      console.error(e);
-    }))
-    .pipe(autoprefixer({
-      browsers: ['last 3 versions'],
-      cascade: false
-    }))
-    .pipe(minifyCss({compatibility: 'ie8'}))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('../static/dist/css'));
-
-  // Pages
-  gulp.src('./sass/pages/*/*.scss')
-    .pipe(sourcemaps.init())
-    .pipe(globbing({
-      extensions: ['.scss']
-    }))
-    .pipe(sass().on('error', function(e) {
-      console.error(e);
-    }))
-    .pipe(autoprefixer({
-      browsers: ['last 2 versions'],
-      cascade: false
-    }))
-    .pipe(minifyCss({compatibility: 'ie8'}))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('../static/dist/css/pages'));
-});
-
-gulp.task('watch', function() {
-  if (!prod) {
-    gulp.watch('./sass/**', ['css']);
-  }
-
-  gulp.start('js');
-  gulp.start('css');
-});
-
-gulp.task('default', ['watch']);
-
-gulp.task('test', function () {
-  karma.start({
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: true
-  }, function(karmaExitStatus) {
-    if (karmaExitStatus) {
-      process.exit(1);
-    }
-  });
-});
