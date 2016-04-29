@@ -1,5 +1,8 @@
-# If there is no venv directory
-elif [ ! -d "$HAB_DIR/venv" ]; then
+# If there is a venv directory
+if [ -d "$HAB_DIR/venv" ]; then
+	# use that environment
+	source $HAB_DIR/venv/bin/activate 
+else 
 	# Use virtualenv to create it.
     virtualenv $HAB_DIR/venv
     # activate the virtualenv
@@ -9,7 +12,6 @@ elif [ ! -d "$HAB_DIR/venv" ]; then
 fi
 
 
-source $HAB_DIR/venv/bin/activate
-cd "${APP}"
+
 # run the server
-python main.py
+python "${APP}/main.py"

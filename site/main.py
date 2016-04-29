@@ -8,8 +8,8 @@ def index():
 
 
 @app.route('/react-example')
-def routes(page):
+def routes():
     return render_template('react-example.html')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

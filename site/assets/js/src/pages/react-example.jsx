@@ -3,6 +3,6 @@ var ReactDOM                = require('react-dom');
 var ColorComponent 		 	= require("../react-components/ColorComponent.jsx");
 
 ReactDOM.render(
-	<ColorComponent />,
+	<ColorComponent color="blue" />,
 	document.getElementById('container')
 );
