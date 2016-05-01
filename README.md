@@ -13,8 +13,11 @@
 There are two options for serving the site.
 
 ### Server - Static ###
-```cd website-workshop/site ```
-```python -m SimpleHTTPServer``` <- statically hosts the compiled html files 
+```
+cd website-workshop/site
+python -m SimpleHTTPServer
+```
+^ statically hosts the compiled html files 
 On your browser, go to localhost:8000/compiled-templates
 And for the react example just go to localhost:8000/compiled-templates/react-example.html
 
