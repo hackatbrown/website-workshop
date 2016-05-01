@@ -53,8 +53,8 @@ function compileJS(watch) {
         var bundler = browserify({
             entries: [page],
             debug: watch,
-            cache: {},                          // Watchify uses cache stuff in order to quickly
-            packageCache: {},                   // regenerate the compiled files
+            cache: {},                                // Watchify uses cache stuff in order to quickly
+            packageCache: {},                         // regenerate the compiled files
             plugin: watch ? [watchify] : [],
           }).transform(babelify, { presets : [ 'react' ] });  // Then, babelify, with React preset
 

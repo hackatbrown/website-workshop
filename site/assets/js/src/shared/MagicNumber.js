@@ -1,4 +1,4 @@
-var number = 20;
+var number = 42;
 
 module.exports = {
 	guess: function(guessed) {
