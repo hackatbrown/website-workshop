@@ -1,5 +1,7 @@
 # website-workshop
 
+### Sandbox ###
+
 ### Client ###
 ```cd website-workshop/site/assets``` <- the main frontend source folder
 
@@ -11,9 +13,11 @@
 There are two options for serving the site.
 
 ### Server - Static ###
-```cd website-workshop/site/compiled-templates ```
-
-```python -m SimpleHTTPServer```` <- statically hosts the compiled html files 
+```cd website-workshop/site ```
+```python -m SimpleHTTPServer``` <- statically hosts the compiled html files 
+On your browser, go to localhost:8000/compiled-templates
+And for the react example just go to localhost:8000/compiled-templates/react-example.html
 
 ### Server - Flask ###
-If you have [virtualenv](https://virtualenv.pypa.io/en/latest/) we recommend you use the simple [flask](http://flask.pocoo.org/) server we have set up. 
+If you have [virtualenv](https://virtualenv.pypa.io/en/latest/) we recommend you use the simple 
+[flask](http://flask.pocoo.org/) server we have set up. 
