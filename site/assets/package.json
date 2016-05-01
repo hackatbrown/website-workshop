@@ -10,6 +10,7 @@
     "babelify": "^7.3.0",
     "browserify": "^13.0.0",
     "colors": "^1.1.2",
+    "glob": "^7.0.3",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-rename": "^1.2.2",
