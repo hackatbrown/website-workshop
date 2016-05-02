@@ -1,20 +1,4 @@
-# Writing SCSS / CSS
-
-These are guidelines for writing SCSS and compiling it to CSS for Hack@Brown. Read them completely at least once, and continue to refer to them as you write your styles. It'll be slow at first, but you'll get used to it.
-
-## Principles
-
-Coming soon.
-
-## Architecture
-
-Coming soon.
-
-## Basic Rules
-
-Coming soon.
-
-## Further Reading
+# The 7 - 1 Architecture
 
 To know more about the 7-1 SCSS architecture, or about the style guidelines we are following, read:
 
@@ -26,4 +10,4 @@ To get a broad overview of SCSS architecture styles and other helpful articles, 
 
 ## Questions
 
-Post in the #dev channel, or ask Sam and Max!
+Ask Sam and Max!
