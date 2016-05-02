@@ -74,3 +74,10 @@ hab up
 hab gulp
 ```
 This setup makes it easy to use project-specific shell variables and quickly write your own shell commands!
+
+## Useful Links ##
+[Thinking in React](https://facebook.github.io/react/docs/thinking-in-react.html)
+
+[Gulp Recipes](https://github.com/gulpjs/gulp/tree/master/docs/recipes)
+
+[Babel](https://babeljs.io/)
