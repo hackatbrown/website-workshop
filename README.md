@@ -1,13 +1,27 @@
 # website-workshop
 
-### Sandbox ###
+## Disclaimer ##
+This is a weird workshop - web dev is a whirlwind right now. There are tools being created and pronounced DOA on a daily basis, and it's easy to feel intimidated - like you can't make an investment in any of them. Regardless of *which* tools are being used though, I have two nuggets of web wisdom for you:
+* *Getting this shit set up is the hardest part*
+* *It's more fun to be fancy.* You shouldn't need to sacrifice your programming principles in order to work on the web, and tools like these can make it all more palatable.
+
+If we haven't adequately explained why we chose the tools that we did, please ask questions! There are so many choices when it comes to choosing your stack and workflow, and we want to help make it easier.
+
+## What's in this box!? ##
+A gulpfile which allows you to use [browserify](http://browserify.org/), [sass](http://sass-lang.com/), [autoprefixer](https://github.com/postcss/autoprefixer), and [react](https://facebook.github.io/react/) with JSX.
+A [7-1 sass architecture](https://sass-guidelin.es/#the-7-1-pattern).
+
+#### And some extras!####
+* Examples of HTML `<meta>` tags which will allow your site to be scraped by Twitter and Facebook.
+* A Flask server with Jinja2 templates demonstrating HTML template inheritance
+* An extensible bash script so you can make your own project sandbox!
 
 ### Client ###
-```cd website-workshop/site/assets``` <- the main frontend source folder
-
-```npm install``` <- downloads dependencies according to the package.json file
-
-```./node_modules/gulp/bin/gulp.js ``` <- runs gulp
+```
+cd website-workshop/site/assets  # the main frontend source folder
+npm install # downloads dependencies according to the package.json file
+./node_modules/gulp/bin/gulp.js # runs gulp 
+```
 
 # Server #
 There are two options for serving the site.
@@ -22,7 +36,7 @@ On your browser, go to [localhost:8000/compiled-templates](http://localhost:8000
 And for the react example just go to [localhost:8000/compiled-templates/react-example.html](http://http://localhost:8000/compiled-templates/react-example.html)
 
 ### Server - Flask ###
-This is a little bit more complicated, but it gives you access to the pages above + a real server that you can deploy to the internet.
+This is a little bit more complicated, but it gives you access to the pages above + a real server with backend logic + jinja2 templating.
 [*Flask*](http://flask.pocoo.org/) is a lightweight Python server similar to the one we used for hackatbrown. In order to get started, run 
 ```
 sudo pip install flask
