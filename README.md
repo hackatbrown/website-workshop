@@ -26,9 +26,6 @@ npm install # downloads dependencies according to the package.json file
 ./node_modules/gulp/bin/gulp.js # runs gulp 
 ```
 
-## Server ##
-There are two options for serving the site.
-
 ### Server - Static ###
 ```
 cd website-workshop/site
@@ -53,7 +50,7 @@ python website-workshop/site/main.py
 ```
 All set!
 
-## Sandbox ##
+### Sandbox ###
 If you find yourself writing shell commands related to a specific task that you do often, this is the section for you!
 We wrote an extensible script, `hab`, which had the following commands:
 ```
