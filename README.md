@@ -8,7 +8,10 @@ This is a weird workshop - web dev is a whirlwind right now. There are tools bei
 If we haven't adequately explained why we chose the tools that we did, please ask questions! There are so many choices when it comes to choosing your stack and workflow, and we want to help make it easier.
 
 ## What's in this box!? ##
+#### Preprocessing
 A gulpfile which allows you to use [browserify](http://browserify.org/), [sass](http://sass-lang.com/), [autoprefixer](https://github.com/postcss/autoprefixer), and [react](https://facebook.github.io/react/) with JSX.
+
+#### Architecture
 A [7-1 sass architecture](https://sass-guidelin.es/#the-7-1-pattern).
 
 #### And some extras!####
