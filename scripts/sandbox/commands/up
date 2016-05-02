@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# If there is a venv directory
+if [ -d "$HAB_DIR/venv" ]; then
+	# use that environment
+	source $HAB_DIR/venv/bin/activate 
+    echo "${TERM_TEXT_CYAN}Server running!${TERM_TEXT_RESET}"
+	# run the server
+	python "${APP}/main.py"
+# If there is no venv directory but the user has virtualenv
+elif command -v virtualenv >/dev/null 2>&1 ; then
+    echo "${TERM_TEXT_CYAN}Creating virtualenv${TERM_TEXT_RESET}"
+	# Use virtualenv to create it.
+    virtualenv $HAB_DIR/venv
+    # activate the virtualenv
+	source $HAB_DIR/venv/bin/activate
+    echo "${TERM_TEXT_CYAN}virtualenv activated${TERM_TEXT_RESET}"
+	# install flask to it.
+    echo "${TERM_TEXT_CYAN}brb, grabbing flask${TERM_TEXT_RESET}"
+    pip install flask
+	# run the server
+    echo "${TERM_TEXT_CYAN}server running!${TERM_TEXT_RESET}"
+	python "${APP}/main.py"
+else
+    echo "${TERM_TEXT_CYAN}No virtualenv so using the static server${TERM_TEXT_RESET}"
+	cd ${APP} && python -m SimpleHTTPServer
+fi
+

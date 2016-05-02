@@ -14,6 +14,8 @@ else
 fi
 
 if [ -z "$HAB_DIR" ]; then
+    # If you want to put this into your bash_profile or bashrc so you can use it all the time,
+    # add a line like `source /Path/to/hab`
     HAB_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )"
 fi
 
@@ -34,11 +36,12 @@ function sandbox() {
 }
 
 function __find_command() {
-    local command="$1"
-    shift
+    local command="$1" # Save the first argument to a local string
+    shift # Move it off the command stack
     if [ -f "$COMMANDS_DIR/$command" ]; then
         export HAB_DIR
         export APP
+        # Execute whatever the command was; $@ passes it all the shifted arguments.
         bash ${COMMANDS_DIR}/$command $@
     else
         echo "${TERM_TEXT_RED}Command not found.${TERM_TEXT_RESET}"
