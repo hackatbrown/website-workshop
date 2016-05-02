@@ -26,7 +26,7 @@ npm install # downloads dependencies according to the package.json file
 ./node_modules/gulp/bin/gulp.js # runs gulp 
 ```
 
-# Server #
+## Server ##
 There are two options for serving the site.
 
 ### Server - Static ###
@@ -52,3 +52,25 @@ Then, do
 python website-workshop/site/main.py
 ```
 All set!
+
+## Sandbox ##
+If you find yourself writing shell commands related to a specific task that you do often, this is the section for you!
+We wrote an extensible script, `hab`, which had the following commands:
+```
+hab # cd to project folder
+hab db [prd] # connect to sql db
+hab deploy [prd|stg] # deploy the site and post to slack
+hab gulp [js|css] # run gulp tasks
+hab install # install python and node dependencies
+hab lint [js|css] # check code against our style guide.
+hab test [web|js|python|all] # run integration / unit tests 
+hab up # run the development server
+```
+Obviously you don't need all of these but we ported over two for this project:
+You can use these right away by doing:
+```
+source website-workshop/scripts/sandbox/hab
+hab up
+hab gulp
+```
+This setup makes it easy to use project-specific shell variables and quickly write your own shell commands!
